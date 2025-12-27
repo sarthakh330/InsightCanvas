@@ -366,25 +366,50 @@ class AIAnalyzer: ObservableObject {
     // MARK: - Response Parsing
 
     private func parseAnalysisResponse(_ jsonString: String) throws -> AnalysisResponse {
+        print("🔍 [Parser] Starting JSON parsing...")
+        print("🔍 [Parser] Raw response length: \(jsonString.count) characters")
+
         // Clean the response in case there's any extra text
         var cleanedJSON = jsonString.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // Remove markdown code blocks if present (```json ... ``` or ``` ... ```)
+        if cleanedJSON.hasPrefix("```") {
+            print("🔍 [Parser] Detected markdown code block, removing...")
+            // Remove opening ```json or ```
+            if let firstNewline = cleanedJSON.firstIndex(of: "\n") {
+                cleanedJSON = String(cleanedJSON[cleanedJSON.index(after: firstNewline)...])
+            }
+            // Remove closing ```
+            if cleanedJSON.hasSuffix("```") {
+                cleanedJSON = String(cleanedJSON.dropLast(3))
+            }
+            cleanedJSON = cleanedJSON.trimmingCharacters(in: .whitespacesAndNewlines)
+            print("🔍 [Parser] After removing markdown: \(cleanedJSON.count) characters")
+        }
 
         // Find JSON boundaries
         if let startIndex = cleanedJSON.firstIndex(of: "{"),
            let endIndex = cleanedJSON.lastIndex(of: "}") {
             cleanedJSON = String(cleanedJSON[startIndex...endIndex])
+            print("🔍 [Parser] Extracted JSON object: \(cleanedJSON.count) characters")
         }
 
         guard let jsonData = cleanedJSON.data(using: .utf8) else {
+            print("❌ [Parser] Failed to convert to UTF-8 data")
             throw AIAnalyzerError.parsingError("Could not convert response to data. Response preview: \(String(jsonString.prefix(500)))")
         }
 
         do {
             let decoder = JSONDecoder()
-            return try decoder.decode(AnalysisResponse.self, from: jsonData)
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let result = try decoder.decode(AnalysisResponse.self, from: jsonData)
+            print("✅ [Parser] Successfully decoded \(result.concepts.count) concepts")
+            return result
         } catch {
             // Include response preview in error for debugging
-            let preview = String(cleanedJSON.prefix(500))
+            let preview = String(cleanedJSON.prefix(800))
+            print("❌ [Parser] Decode error: \(error)")
+            print("❌ [Parser] JSON preview:\n\(preview)")
             throw AIAnalyzerError.parsingError("JSON decode failed: \(error.localizedDescription)\n\nResponse preview:\n\(preview)")
         }
     }

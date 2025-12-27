@@ -117,6 +117,7 @@ struct WelcomeScreen: View {
                 }
                 .padding(.top, 16)
             }
+            .padding(.top, 60)
         }
         .onAppear {
             // Stage 1: Background fade in

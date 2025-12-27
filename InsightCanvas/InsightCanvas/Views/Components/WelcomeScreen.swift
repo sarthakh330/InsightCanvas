@@ -49,12 +49,12 @@ struct WelcomeScreen: View {
                             ]),
                             center: .topLeading,
                             startRadius: 50,
-                            endRadius: 400
+                            endRadius: 300
                         )
                     )
-                    .frame(width: 600, height: 600)
-                    .offset(x: -200, y: -200)
-                    .blur(radius: 60)
+                    .frame(width: 450, height: 450)
+                    .offset(x: -150, y: -150)
+                    .blur(radius: 45)
                     .opacity(backgroundOpacity)
 
                 Circle()
@@ -66,12 +66,12 @@ struct WelcomeScreen: View {
                             ]),
                             center: .bottomTrailing,
                             startRadius: 50,
-                            endRadius: 350
+                            endRadius: 260
                         )
                     )
-                    .frame(width: 500, height: 500)
-                    .offset(x: 200, y: 200)
-                    .blur(radius: 50)
+                    .frame(width: 375, height: 375)
+                    .offset(x: 150, y: 150)
+                    .blur(radius: 38)
                     .opacity(backgroundOpacity)
             }
 

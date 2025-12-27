@@ -341,7 +341,7 @@ class AIAnalyzer: ObservableObject {
 
         let requestBody: [String: Any] = [
             "model": model,
-            "max_tokens": 1200,
+            "max_tokens": 2400,
             "system": system,
             "messages": [
                 ["role": "user", "content": userMessage]

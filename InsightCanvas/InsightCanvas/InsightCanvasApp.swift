@@ -10,6 +10,9 @@ import SwiftData
 
 @main
 struct InsightCanvasApp: App {
+    @State private var showingAPIKeyAlert = false
+    @State private var showWelcomeScreen = true
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Analysis.self,
@@ -27,7 +30,35 @@ struct InsightCanvasApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainCoordinator()
+            ZStack {
+                MainCoordinator()
+                    .opacity(showWelcomeScreen ? 0 : 1)
+
+                if showWelcomeScreen {
+                    WelcomeScreen()
+                        .transition(.opacity)
+                }
+            }
+            .onAppear {
+                // Show welcome screen for 2 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        showWelcomeScreen = false
+                    }
+
+                    // Check API key after welcome screen
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if !Config.isAPIKeyConfigured() {
+                            showingAPIKeyAlert = true
+                        }
+                    }
+                }
+            }
+            .alert("API Key Required", isPresented: $showingAPIKeyAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(Config.getSetupMessage())
+            }
         }
         .modelContainer(sharedModelContainer)
         .windowStyle(.hiddenTitleBar)

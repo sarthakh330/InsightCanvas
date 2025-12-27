@@ -70,11 +70,29 @@ It's NOT a chat interface or traditional summarizer—it's a structured understa
 ## Setup
 
 1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/insight-canvas.git
+   cd insight-canvas
+   ```
+
 2. Get an Anthropic API key from [console.anthropic.com](https://console.anthropic.com/settings/keys)
-3. Set up the API key:
-   - In Xcode: `Product > Scheme > Edit Scheme > Run > Environment Variables`
+
+3. Set up the API key (choose one method):
+
+   **Method 1: .env File (Recommended)**
+   ```bash
+   # Create a .env file in the project root
+   echo "ANTHROPIC_API_KEY=your-key-here" > .env
+   ```
+
+   **Method 2: Xcode Environment Variables**
+   - Open the project in Xcode
+   - Go to `Product > Scheme > Edit Scheme > Run > Environment Variables`
    - Add: `ANTHROPIC_API_KEY = your-key-here`
+
 4. Build and run in Xcode (requires macOS 14.0+)
+
+> **Note**: The app will show a friendly setup message if the API key is not configured. A welcome screen appears for 2 seconds on first launch.
 
 ## Architecture
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		293D4219FF917DFD1105F6DE /* AnalyzingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACFCE4B5C01E7E94597FD46 /* AnalyzingView.swift */; };
 		3AD430CE4306B6847A818B6C /* InsightCanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06377E285D91DFB2D05698D2 /* InsightCanvasApp.swift */; };
+		46D30F8C0209398B08687170 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2E146FEEA10EF0366D723 /* WelcomeScreen.swift */; };
 		619F8DA92617EEABD467BFAF /* Excerpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4974EF41FB6D60E4CD3E9216 /* Excerpt.swift */; };
 		6255CA57D2A79190DFD91E15 /* AIAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B8F28C8AE4D8D2FFBBD09D /* AIAnalyzer.swift */; };
 		83247E4669F63286D151B3E1 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14D3BC49F89FBFE13111E43 /* Concept.swift */; };
@@ -17,6 +18,7 @@
 		B5FB0BBA489217F43CA8C34D /* ConceptDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5DE19C23E6B477033163A1 /* ConceptDetailView.swift */; };
 		C6BE9251E4B32A7B6717D22D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81EC1ADB78A28E6FEE269CF /* HomeView.swift */; };
 		CA5F7C94AF07BF68E18BE3DE /* ConceptCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597F4635B7399FCBB37ED616 /* ConceptCanvasView.swift */; };
+		CEC508A79931F45DA3A397B3 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003E765242300E119056D9C3 /* ColorTheme.swift */; };
 		D4738CD78AC558CB3101E501 /* SwiftData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD276E5C51475840F2CE0552 /* SwiftData.framework */; };
 		D55FC94A805F135C97D3E1F1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FA1F03F3E953E3E857049 /* Config.swift */; };
 		E5E1B60CF89B1F372D7768CB /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556A0BB4E95D10A0A012C47E /* Analysis.swift */; };
@@ -26,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		003E765242300E119056D9C3 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		06377E285D91DFB2D05698D2 /* InsightCanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightCanvasApp.swift; sourceTree = "<group>"; };
 		0ACFCE4B5C01E7E94597FD46 /* AnalyzingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingView.swift; sourceTree = "<group>"; };
 		1CFB83CB69E6B352143471B8 /* InsightCanvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InsightCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +40,7 @@
 		597F4635B7399FCBB37ED616 /* ConceptCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptCanvasView.swift; sourceTree = "<group>"; };
 		6840E77EC70AF4C7ABF45EBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9598BB44F11BD553D11F5A74 /* DocumentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentParser.swift; sourceTree = "<group>"; };
+		98F2E146FEEA10EF0366D723 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		9B6CB704D46E5DD849B5948A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A00FA1F03F3E953E3E857049 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A14D3BC49F89FBFE13111E43 /* Concept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
@@ -59,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09EEDE3CD14DBDEDD3095385 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				003E765242300E119056D9C3 /* ColorTheme.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		22E0D84402C30BE4CBE4D97A /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +115,7 @@
 				06377E285D91DFB2D05698D2 /* InsightCanvasApp.swift */,
 				9592EABE52B0847315F372FE /* Models */,
 				22E0D84402C30BE4CBE4D97A /* Services */,
+				09EEDE3CD14DBDEDD3095385 /* Utilities */,
 				AB1BD40D4D9A4003CD8FBA7E /* Views */,
 			);
 			name = InsightCanvas;
@@ -143,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				0ACFCE4B5C01E7E94597FD46 /* AnalyzingView.swift */,
+				98F2E146FEEA10EF0366D723 /* WelcomeScreen.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -225,6 +239,7 @@
 				6255CA57D2A79190DFD91E15 /* AIAnalyzer.swift in Sources */,
 				E5E1B60CF89B1F372D7768CB /* Analysis.swift in Sources */,
 				293D4219FF917DFD1105F6DE /* AnalyzingView.swift in Sources */,
+				CEC508A79931F45DA3A397B3 /* ColorTheme.swift in Sources */,
 				83247E4669F63286D151B3E1 /* Concept.swift in Sources */,
 				CA5F7C94AF07BF68E18BE3DE /* ConceptCanvasView.swift in Sources */,
 				B5FB0BBA489217F43CA8C34D /* ConceptDetailView.swift in Sources */,
@@ -235,6 +250,7 @@
 				C6BE9251E4B32A7B6717D22D /* HomeView.swift in Sources */,
 				3AD430CE4306B6847A818B6C /* InsightCanvasApp.swift in Sources */,
 				F9A111325464B0C9C6819E40 /* MainCoordinator.swift in Sources */,
+				46D30F8C0209398B08687170 /* WelcomeScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

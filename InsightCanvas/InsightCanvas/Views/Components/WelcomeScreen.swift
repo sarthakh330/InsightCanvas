@@ -75,12 +75,13 @@ struct WelcomeScreen: View {
                     .opacity(backgroundOpacity)
             }
 
-            VStack(spacing: 48) {
+            VStack(spacing: 64) {
                 // Logo with floating animation
                 Image("AppLogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 180, height: 180)
+                    .clipShape(Circle())
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
                     .rotationEffect(.degrees(logoRotation))

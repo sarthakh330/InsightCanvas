@@ -88,7 +88,7 @@ struct HomeView: View {
                                 .font(.system(size: 12))
                                 .foregroundColor(Color(red: 0.561, green: 0.537, blue: 0.494))
                         }
-                        .padding(44)
+                        .padding(68)
                     }
                     .onDrop(of: [.fileURL], isTargeted: $isDropTargeted) { providers in
                         handleFileDrop(providers: providers)

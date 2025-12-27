@@ -1,0 +1,18 @@
+AI Agents: A Simple Overview
+
+Introduction
+AI agents are software systems that can perceive their environment, make decisions, and take actions to achieve goals.
+
+Key Components
+
+Memory
+Agents need memory to maintain context across interactions.
+
+Planning
+Planning helps agents break down complex tasks into steps.
+
+Tools
+Tools extend agent capabilities beyond text generation.
+
+Conclusion
+Modern AI agents combine memory, planning, and tools to solve real-world problems.

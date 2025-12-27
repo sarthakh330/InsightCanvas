@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Canvas - Home Screen Mockup</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "base-bg-light": "#FFFFFF",
+                        "base-text-light": "#111317",
+                        "surface-light": "#F4F6F8",
+                        "divider-light": "#DADDE1",
+                        "base-bg-dark": "#F8F5E9",
+                        "base-text-dark": "#111317",
+                        "surface-dark": "#FFFFFF",
+                        "divider-dark": "#DADDE1",
+                        "accent": {
+                            DEFAULT: "#2F8F6B",
+                            dark: "#2F8F6B",
+                            highlight: "#E4F2EC",
+                            muted: "#E1F26A",
+                        },
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "glow": "0 0 20px -5px rgba(47, 143, 107, 0.3)",
+                        "glow-dark": "0 0 20px -5px rgba(47, 143, 107, 0.3)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DADDE1;
+            border-radius: 4px;
+        }.dark ::-webkit-scrollbar-thumb {
+            background: #DADDE1;}
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;}.drop-zone {
+            transition: all 0.3s ease;
+        }
+        .drop-zone:hover {
+            border-color: #2F8F6B;
+            background-color: rgba(47, 143, 107, 0.03);
+            transform: scale(1.005);
+        }.dark .drop-zone:hover {
+            border-color: #2F8F6B;background-color: rgba(47, 143, 107, 0.03);}
+    </style>
+</head>
+<body class="bg-base-bg-dark text-base-text-dark font-display antialiased selection:bg-accent/30 selection:text-base-text-dark overflow-hidden">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<main class="flex flex-col flex-1 items-center justify-center p-6 w-full max-w-4xl mx-auto">
+<div class="w-full max-w-[640px] flex flex-col items-center gap-6 animate-fade-in-up">
+<div class="drop-zone group relative flex w-full flex-col items-center justify-center gap-6 rounded-[2rem] border border-dashed border-divider-dark bg-surface-dark px-8 py-20 shadow-sm dark:shadow-none cursor-pointer">
+<div class="rounded-2xl bg-white dark:bg-surface-dark p-4 text-gray-500 group-hover:text-accent transition-colors duration-300">
+<span class="material-symbols-outlined text-4xl">description</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<h2 class="text-xl md:text-2xl font-semibold tracking-tight text-base-text-dark">
+                            Drop a document to understand it
+                        </h2>
+<p class="text-sm md:text-base font-normal text-gray-500 max-w-sm">
+                            Generate a structured concept map and key insights
+                        </p>
+</div>
+<button class="relative flex items-center justify-center gap-2 overflow-hidden rounded-full bg-base-text-dark hover:bg-accent px-6 py-2.5 text-sm font-medium text-base-bg-dark hover:text-white transition-all duration-300 shadow-md hover:shadow-glow">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+<span>Import document...</span>
+</button>
+</div>
+<div class="text-center">
+<p class="text-xs font-medium text-gray-500 tracking-wide font-mono">
+                        .txt · .md · .html · .docx
+                    </p>
+</div>
+</div>
+<div class="h-16 w-full"></div>
+<div class="w-full max-w-[520px] flex flex-col items-center gap-4 opacity-90 hover:opacity-100 transition-opacity duration-300">
+<div class="relative flex w-full items-center rounded-full bg-surface-dark p-1.5 pl-5 ring-1 ring-divider-dark focus-within:ring-accent/50 transition-all shadow-sm">
+<span class="material-symbols-outlined text-gray-500 mr-3 text-xl">link</span>
+<input class="flex-1 bg-transparent border-none p-0 text-sm md:text-base text-base-text-dark placeholder:text-gray-500 focus:ring-0" placeholder="Paste a YouTube link to analyze..." type="text"/>
+<button class="ml-2 flex items-center justify-center rounded-full bg-divider-dark hover:bg-accent text-base-text-dark hover:text-white px-4 py-2 text-xs font-bold tracking-wide transition-colors duration-200">
+                        Analyze
+                    </button>
+</div>
+<p class="text-xs md:text-sm text-center text-gray-500">
+                    We'll extract the transcript and build the same concept canvas
+                </p>
+</div>
+</main>
+<footer class="flex w-full justify-center pb-6 pt-4">
+<div class="flex items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px] text-gray-500">lock</span>
+<p class="text-xs font-medium text-gray-500">
+                    No accounts. Your content stays on your Mac.
+                </p>
+</div>
+</footer>
+</div>
+
+</body></html>

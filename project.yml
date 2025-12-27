@@ -1,0 +1,27 @@
+name: InsightCanvas
+options:
+  bundleIdPrefix: com.sarthak
+  deploymentTarget:
+    macOS: "14.0"
+  developmentLanguage: en
+
+settings:
+  MACOSX_DEPLOYMENT_TARGET: "14.0"
+  SWIFT_VERSION: "5.9"
+  ENABLE_PREVIEWS: YES
+
+targets:
+  InsightCanvas:
+    type: application
+    platform: macOS
+    sources:
+      - InsightCanvas/InsightCanvas
+    settings:
+      INFOPLIST_FILE: InsightCanvas/InsightCanvas/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.sarthak.InsightCanvas
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      ENABLE_PREVIEWS: YES
+      DEVELOPMENT_ASSET_PATHS: "InsightCanvas/InsightCanvas/Preview\\ Content"
+    dependencies:
+      - sdk: SwiftUI.framework
+      - sdk: SwiftData.framework

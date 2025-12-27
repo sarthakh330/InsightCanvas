@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Canvas - Concept Canvas Mockup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols_Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "txt-primary": "#111317",
+                        "txt-secondary": "#5C6168",
+                        "txt-tertiary": "#8f897e",
+                        "accent": "#2F8F6B",
+                        "accent-highlight": "#E4F2EC",
+                        "divider": "#DADDE1",
+                        "bg-canvas": "#fdfcf9",
+                        "bg-sidebar": "#f2f0e9",
+                        "bg-surface": "#FFFFFF",
+                        "border-beige": "#e2dfd6",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 8px rgba(0,0,0,0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1cdc7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b0aca6;
+        }details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }.focus-ring:focus-visible {
+            outline: 2px solid #2F8F6B;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-bg-canvas text-txt-primary font-sans antialiased h-screen flex overflow-hidden selection:bg-accent-highlight selection:text-accent">
+<aside class="w-[280px] md:w-[320px] flex-shrink-0 flex flex-col border-r border-border-beige bg-bg-sidebar">
+<div class="px-3 pt-4 pb-2 sticky top-0 bg-bg-sidebar z-10">
+<div class="relative group">
+<span class="absolute left-2.5 top-1.5 text-txt-secondary pointer-events-none">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</span>
+<input class="w-full bg-white border border-border-beige rounded-md py-1.5 pl-9 pr-2 text-sm text-txt-primary placeholder-txt-secondary focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all shadow-sm focus-ring" placeholder="Search concepts" type="text"/>
+<div class="absolute right-2 top-1.5 pointer-events-none">
+<kbd class="hidden sm:inline-flex items-center h-5 px-1.5 border border-border-beige rounded text-[10px] font-mono text-txt-secondary bg-bg-canvas">⌘K</kbd>
+</div>
+</div>
+</div>
+<nav aria-label="Concept Map" class="flex-1 overflow-y-auto px-2 py-2 space-y-0.5 select-none">
+<div>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-txt-secondary hover:bg-black/5 rounded group text-left transition-colors focus-ring">
+<span class="material-symbols-outlined text-[18px] text-txt-tertiary group-hover:text-txt-secondary transition-colors">arrow_right</span>
+                    System Architecture
+                </button>
+</div>
+<div>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-txt-primary hover:bg-black/5 rounded group text-left transition-colors focus-ring">
+<span class="material-symbols-outlined text-[18px] text-txt-secondary rotate-90 transition-transform">arrow_right</span>
+                    Agent Core
+                </button>
+<div class="relative ml-2 pl-2 border-l border-border-beige mt-0.5 space-y-0.5">
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm text-txt-secondary hover:bg-black/5 rounded text-left transition-colors focus-ring">
+<span class="w-[18px]"></span>
+                        Orchestration
+                    </button>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm font-semibold text-accent bg-accent-highlight rounded text-left relative shadow-sm ring-1 ring-black/5 focus-ring">
+<span class="material-symbols-outlined text-[18px] text-accent rotate-90">arrow_right</span>
+                        Memory Systems
+                    </button>
+<div class="relative ml-4 pl-2 border-l border-border-beige space-y-0.5 mt-0.5">
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm text-txt-secondary hover:text-txt-primary hover:bg-black/5 rounded text-left transition-colors focus-ring">
+                            Vector Store
+                        </button>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm text-txt-secondary hover:text-txt-primary hover:bg-black/5 rounded text-left transition-colors focus-ring">
+                            Short-term Buffer
+                        </button>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm text-txt-secondary hover:text-txt-primary hover:bg-black/5 rounded text-left transition-colors focus-ring">
+                            Decay Logic
+                        </button>
+</div>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm text-txt-secondary hover:bg-black/5 rounded text-left transition-colors focus-ring">
+<span class="w-[18px]"></span>
+                        Tool Use
+                    </button>
+</div>
+</div>
+<div>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-txt-secondary hover:bg-black/5 rounded group text-left transition-colors focus-ring">
+<span class="material-symbols-outlined text-[18px] text-txt-tertiary group-hover:text-txt-secondary transition-colors">arrow_right</span>
+                    Evaluation Metrics
+                </button>
+</div>
+<div>
+<button class="w-full flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-txt-secondary hover:bg-black/5 rounded group text-left transition-colors focus-ring">
+<span class="material-symbols-outlined text-[18px] text-txt-tertiary group-hover:text-txt-secondary transition-colors">arrow_right</span>
+                    Deployment
+                </button>
+</div>
+</nav>
+<div class="px-4 py-3 border-t border-border-beige text-[11px] text-txt-tertiary flex justify-between items-center bg-bg-sidebar">
+<span>Graph v2.4</span>
+<div class="flex items-center gap-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+</span>
+<span>Online</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 h-full overflow-y-auto bg-bg-canvas relative scroll-smooth focus:outline-none" tabindex="0">
+<div class="max-w-[720px] mx-auto pt-10 pb-20 px-8 md:px-12 lg:px-16 fade-in">
+<nav class="flex items-center gap-2 text-xs font-medium text-txt-secondary mb-8 opacity-70 hover:opacity-100 transition-opacity">
+<a class="hover:text-accent transition-colors focus-ring rounded px-1 -ml-1" href="#">Agent Core</a>
+<span class="material-symbols-outlined text-[12px] text-divider">chevron_right</span>
+<span class="text-txt-primary px-1">Memory Systems</span>
+</nav>
+<header class="mb-10">
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-txt-primary mb-3">Memory Systems</h1>
+<p class="text-lg text-txt-secondary leading-relaxed font-normal">
+                    The architectural component responsible for persistence, retrieval, and contextual continuity across interaction sessions.
+                </p>
+</header>
+<div class="mb-10 p-5 rounded-lg border border-accent/20 bg-accent-highlight/30 flex gap-4 items-start shadow-[0_1px_2px_rgba(47,143,107,0.05)]">
+<span class="material-symbols-outlined text-accent mt-0.5">psychology</span>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-accent mb-1.5">Mental Model</h3>
+<p class="text-txt-primary text-sm leading-relaxed font-medium">
+                        Think of the Memory System as a <span class="text-accent underline decoration-1 underline-offset-2">librarian with a short-term notepad</span>. It maintains a vast, indexed archive (Vector DB) while keeping immediate sticky notes (Context Window) for the conversation at hand.
+                    </p>
+</div>
+</div>
+<section class="mb-8">
+<h2 class="text-xs font-bold uppercase tracking-wider text-txt-secondary mb-3 border-b border-divider pb-1 w-full flex items-center gap-2">
+                    What this is
+                </h2>
+<div class="text-txt-primary leading-7 text-[15px]">
+<p>
+                        A composite system integrating vector-based semantic search with a sliding-window buffer. It decouples information storage from model weights, allowing the agent to "remember" user preferences and factual constraints dynamically without retraining.
+                    </p>
+</div>
+</section>
+<section class="mb-10">
+<h2 class="text-xs font-bold uppercase tracking-wider text-txt-secondary mb-3 border-b border-divider pb-1 w-full">
+                    Why it matters
+                </h2>
+<p class="text-txt-primary leading-7 text-[15px]">
+                    It prevents catastrophic forgetting in long-running tasks. Without this layer, the agent operates in a perpetually amnesic state, unable to reference decisions made even a few minutes prior once they slide out of the immediate token window.
+                </p>
+</section>
+<section class="mb-10">
+<h2 class="text-xs font-bold uppercase tracking-wider text-txt-secondary mb-4 border-b border-divider pb-1 w-full">
+                    Design Tradeoffs
+                </h2>
+<ul class="space-y-4">
+<li class="flex gap-3 items-start group">
+<span class="w-1.5 h-1.5 rounded-full bg-txt-tertiary mt-2 group-hover:bg-accent transition-colors shrink-0"></span>
+<div class="text-[15px] leading-relaxed">
+<strong class="text-txt-primary font-semibold block mb-0.5">Latency vs. Recall</strong>
+<span class="text-txt-secondary">Full semantic search adds ~200ms overhead per turn, creating a noticeable pause in real-time interactions compared to pure context-window lookup.</span>
+</div>
+</li>
+<li class="flex gap-3 items-start group">
+<span class="w-1.5 h-1.5 rounded-full bg-txt-tertiary mt-2 group-hover:bg-accent transition-colors shrink-0"></span>
+<div class="text-[15px] leading-relaxed">
+<strong class="text-txt-primary font-semibold block mb-0.5">Precision vs. Fuzzy Matching</strong>
+<span class="text-txt-secondary">Vector embeddings capture meaning but struggle with exact keyword retrieval (e.g., specific IDs), necessitating hybrid search strategies.</span>
+</div>
+</li>
+<li class="flex gap-3 items-start group">
+<span class="w-1.5 h-1.5 rounded-full bg-txt-tertiary mt-2 group-hover:bg-accent transition-colors shrink-0"></span>
+<div class="text-[15px] leading-relaxed">
+<strong class="text-txt-primary font-semibold block mb-0.5">Cost vs. Context Depth</strong>
+<span class="text-txt-secondary">Storing infinite history scales storage costs linearly, forcing the implementation of aggressive summarization or decay algorithms that may lose nuance.</span>
+</div>
+</li>
+</ul>
+</section>
+<section class="mb-12 pt-5 border-t border-divider">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-sm text-txt-secondary font-medium mr-2">Related concepts:</span>
+<a class="inline-flex items-center px-2 py-1 rounded bg-bg-surface border border-border-beige text-sm text-accent hover:border-accent hover:shadow-sm transition-all focus-ring" href="#">Vector Database</a>
+<a class="inline-flex items-center px-2 py-1 rounded bg-bg-surface border border-border-beige text-sm text-accent hover:border-accent hover:shadow-sm transition-all focus-ring" href="#">Embeddings</a>
+<a class="inline-flex items-center px-2 py-1 rounded bg-bg-surface border border-border-beige text-sm text-accent hover:border-accent hover:shadow-sm transition-all focus-ring" href="#">Orchestration Layer</a>
+</div>
+</section>
+<section class="mb-10">
+<details class="group bg-bg-surface border border-border-beige rounded-lg overflow-hidden transition-all duration-300 shadow-soft">
+<summary class="flex items-center justify-between px-4 py-3 cursor-pointer bg-bg-surface hover:bg-gray-50 transition-colors focus-ring">
+<div class="flex items-center gap-2 text-sm font-semibold text-txt-secondary">
+<span class="material-symbols-outlined text-[18px] text-txt-tertiary transition-transform duration-200 group-open:rotate-90">chevron_right</span>
+                            Grounded in the source
+                        </div>
+<span class="text-[10px] font-medium uppercase tracking-wide text-txt-tertiary px-2 py-0.5 bg-bg-canvas border border-border-beige rounded">2 excerpts</span>
+</summary>
+<div class="p-5 space-y-5 bg-bg-canvas/50 border-t border-border-beige">
+<div class="relative pl-4 border-l-2 border-accent/40 group/quote">
+<blockquote class="text-sm text-txt-secondary italic font-serif leading-relaxed mb-1.5">
+                                "We observe that pure recurrent memory architectures fail to generalize beyond 4k tokens without significant degradation. The hybrid vector approach demonstrated a 40% improvement in factual recall."
+                            </blockquote>
+<div class="flex items-center gap-2">
+<span class="text-[11px] text-txt-tertiary font-medium uppercase tracking-wide">Section 4.2: Results</span>
+<button class="opacity-0 group-hover/quote:opacity-100 transition-opacity text-[11px] text-accent hover:underline flex items-center gap-0.5">
+                                    View Page <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</div>
+</div>
+<div class="relative pl-4 border-l-2 border-border-beige group/quote hover:border-accent/40 transition-colors">
+<blockquote class="text-sm text-txt-secondary italic font-serif leading-relaxed mb-1.5">
+                                "The separation of concerns between the planner and the memory module allows for hot-swapping the underlying database technology with zero downtime."
+                            </blockquote>
+<div class="flex items-center gap-2">
+<span class="text-[11px] text-txt-tertiary font-medium uppercase tracking-wide">Appendix B</span>
+<button class="opacity-0 group-hover/quote:opacity-100 transition-opacity text-[11px] text-accent hover:underline flex items-center gap-0.5">
+                                    View Page <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</details>
+</section>
+</div>
+</main>
+
+</body></html>

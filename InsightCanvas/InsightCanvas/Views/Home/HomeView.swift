@@ -56,7 +56,12 @@ struct HomeView: View {
                             )
                             .frame(width: 480, height: 220)
 
-                        VStack(spacing: 20) {
+                        // Inner container to create proper spacing from dashed border
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color.clear)
+                            .frame(width: 420, height: 180)
+                            .overlay(
+                                VStack(spacing: 20) {
                             Image(systemName: "arrow.down.doc")
                                 .font(.system(size: 48))
                                 .foregroundColor(Color(red: 0.561, green: 0.537, blue: 0.494))
@@ -87,8 +92,8 @@ struct HomeView: View {
                             Text(".txt · .md · .html · .docx")
                                 .font(.system(size: 12))
                                 .foregroundColor(Color(red: 0.561, green: 0.537, blue: 0.494))
-                        }
-                        .padding(68)
+                                }
+                            )
                     }
                     .onDrop(of: [.fileURL], isTargeted: $isDropTargeted) { providers in
                         handleFileDrop(providers: providers)

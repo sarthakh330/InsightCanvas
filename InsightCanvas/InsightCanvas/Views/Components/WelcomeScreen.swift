@@ -80,7 +80,7 @@ struct WelcomeScreen: View {
                 Image("AppLogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 180, height: 180)
+                    .frame(width: 135, height: 135)
                     .clipShape(Circle())
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)

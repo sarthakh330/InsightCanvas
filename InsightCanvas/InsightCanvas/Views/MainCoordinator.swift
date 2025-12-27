@@ -43,7 +43,12 @@ struct MainCoordinator: View {
                 )
 
             case .canvas(let analysis):
-                ConceptCanvasView(analysis: analysis)
+                ConceptCanvasView(
+                    analysis: analysis,
+                    onBackToHome: {
+                        appState = .home
+                    }
+                )
             }
         }
     }

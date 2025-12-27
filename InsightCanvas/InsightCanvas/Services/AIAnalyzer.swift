@@ -255,25 +255,52 @@ class AIAnalyzer: ObservableObject {
 
     private func buildSystemPrompt(isChunk: Bool = false) -> String {
         """
-        You are an expert learning assistant. Extract a structured, progressive summary.
+        You are an expert learning assistant. Extract multiple distinct concepts from the document.
 
-        OUTPUT ONLY valid JSON:
+        OUTPUT ONLY valid JSON with 3-6 separate concepts:
         {
           "concepts": [
             {
-              "id": "summary-001",
-              "title": "Document Analysis",
+              "id": "concept-001",
+              "title": "Core Thesis",
               "parent_id": null,
               "order": 0,
-              "one_line_summary": "The document's main focus in one clear sentence",
-              "what_this_is": "PARAGRAPH 1: What this document is about. Start with the topic, then explain the scope and approach. 2-3 sentences that give complete context.",
-              "why_it_matters": "PARAGRAPH 2: Why this matters and who should care. Explain the significance, impact, or applications. 2-3 sentences showing real-world relevance.",
+              "one_line_summary": "The document's main argument in one sentence",
+              "what_this_is": "2-3 sentences explaining what this concept/idea is about",
+              "why_it_matters": "2-3 sentences on why this is significant",
               "key_points": [
-                "PARAGRAPH 3: The single most important insight or takeaway (1-2 sentences)",
-                "Core Takeaway 2: Second most important point",
-                "Core Takeaway 3: Third key learning",
-                "Core Takeaway 4: Fourth insight",
-                "Core Takeaway 5: Fifth point (if applicable)"
+                "First key point about this concept",
+                "Second key point",
+                "Third key point"
+              ],
+              "excerpts": []
+            },
+            {
+              "id": "concept-002",
+              "title": "Key Framework",
+              "parent_id": null,
+              "order": 1,
+              "one_line_summary": "Brief description of the framework",
+              "what_this_is": "What the framework is and how it works",
+              "why_it_matters": "Why this framework matters",
+              "key_points": [
+                "Framework component 1",
+                "Framework component 2",
+                "Framework component 3"
+              ],
+              "excerpts": []
+            },
+            {
+              "id": "concept-003",
+              "title": "Core Challenge",
+              "parent_id": null,
+              "order": 2,
+              "one_line_summary": "The main problem or challenge discussed",
+              "what_this_is": "Description of the challenge",
+              "why_it_matters": "Why this challenge is important",
+              "key_points": [
+                "Aspect 1 of the challenge",
+                "Aspect 2 of the challenge"
               ],
               "excerpts": []
             }
@@ -282,10 +309,11 @@ class AIAnalyzer: ObservableObject {
         }
 
         CRITICAL:
-        - First key_point is a paragraph (the key insight)
-        - Other key_points are concise takeaways
-        - Make it engaging and clear
-        - Focus on learning value
+        - Create 3-6 SEPARATE concepts, not one big summary
+        - Each concept should be a distinct idea, framework, challenge, or insight
+        - Give each concept a specific, descriptive title (not "Summary" or "Analysis")
+        - Make concepts progressively detailed: start broad, then go deeper
+        - Use clear, engaging language
         """
     }
 

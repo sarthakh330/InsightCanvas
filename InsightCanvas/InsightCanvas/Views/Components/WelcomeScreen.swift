@@ -75,7 +75,7 @@ struct WelcomeScreen: View {
                     .opacity(backgroundOpacity)
             }
 
-            VStack(spacing: 24) {
+            VStack(spacing: 48) {
                 // Logo with floating animation
                 Image("AppLogo")
                     .resizable()
@@ -88,7 +88,7 @@ struct WelcomeScreen: View {
                     .shadow(color: Color.black.opacity(0.12), radius: 30, x: 0, y: 15)
                     .shadow(color: Color(red: 0.184, green: 0.561, blue: 0.420).opacity(0.2), radius: 40, x: 0, y: 20)
 
-                VStack(spacing: 16) {
+                VStack(spacing: 20) {
                     // App name with smooth entrance
                     Text("InsightCanvas")
                         .font(.system(size: 42, weight: .semibold, design: .rounded))

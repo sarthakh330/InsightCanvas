@@ -13,6 +13,7 @@ struct ConceptMapView: View {
     @Binding var searchText: String
 
     @State private var expandedConceptIDs: Set<UUID> = []
+    @State private var visibleConceptCount = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -24,20 +25,29 @@ struct ConceptMapView: View {
             // Concept hierarchy
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 4) {
-                    ForEach(topLevelConcepts, id: \.id) { concept in
-                        ConceptRow(
-                            concept: concept,
-                            level: 0,
-                            selectedConcept: $selectedConcept,
-                            expandedConceptIDs: $expandedConceptIDs,
-                            allConcepts: concepts
-                        )
+                    ForEach(Array(topLevelConcepts.enumerated()), id: \.element.id) { index, concept in
+                        if index < visibleConceptCount {
+                            ConceptRow(
+                                concept: concept,
+                                level: 0,
+                                selectedConcept: $selectedConcept,
+                                expandedConceptIDs: $expandedConceptIDs,
+                                allConcepts: concepts
+                            )
+                            .transition(.asymmetric(
+                                insertion: .opacity.combined(with: .move(edge: .top)),
+                                removal: .opacity
+                            ))
+                        }
                     }
                 }
                 .padding(.vertical, 8)
             }
         }
         .background(Color("BG-Sidebar"))
+        .onAppear {
+            animateConceptsIn()
+        }
     }
 
     private var searchBar: some View {
@@ -59,6 +69,26 @@ struct ConceptMapView: View {
         concepts
             .filter { $0.parentID == nil }
             .sorted { $0.order < $1.order }
+    }
+
+    /// Animate concepts in one by one for progressive reveal
+    private func animateConceptsIn() {
+        let totalConcepts = topLevelConcepts.count
+        guard totalConcepts > 0 else { return }
+
+        // Show first concept immediately
+        withAnimation(.easeOut(duration: 0.4)) {
+            visibleConceptCount = 1
+        }
+
+        // Show remaining concepts with staggered delays
+        for index in 1..<totalConcepts {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.15) {
+                withAnimation(.easeOut(duration: 0.4)) {
+                    visibleConceptCount = index + 1
+                }
+            }
+        }
     }
 }
 

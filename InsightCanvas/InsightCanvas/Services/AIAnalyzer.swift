@@ -255,27 +255,37 @@ class AIAnalyzer: ObservableObject {
 
     private func buildSystemPrompt(isChunk: Bool = false) -> String {
         """
-        Extract a quick summary from the document.
+        You are an expert learning assistant. Extract a structured, progressive summary.
 
         OUTPUT ONLY valid JSON:
         {
           "concepts": [
             {
               "id": "summary-001",
-              "title": "Document Summary",
+              "title": "Document Analysis",
               "parent_id": null,
               "order": 0,
-              "one_line_summary": "Main point in one sentence",
-              "what_this_is": "A brief 2-3 sentence summary of the entire document",
-              "why_it_matters": "Why this document is important",
-              "key_points": ["Takeaway 1", "Takeaway 2", "Takeaway 3", "Takeaway 4"],
+              "one_line_summary": "The document's main focus in one clear sentence",
+              "what_this_is": "PARAGRAPH 1: What this document is about. Start with the topic, then explain the scope and approach. 2-3 sentences that give complete context.",
+              "why_it_matters": "PARAGRAPH 2: Why this matters and who should care. Explain the significance, impact, or applications. 2-3 sentences showing real-world relevance.",
+              "key_points": [
+                "PARAGRAPH 3: The single most important insight or takeaway (1-2 sentences)",
+                "Core Takeaway 2: Second most important point",
+                "Core Takeaway 3: Third key learning",
+                "Core Takeaway 4: Fourth insight",
+                "Core Takeaway 5: Fifth point (if applicable)"
+              ],
               "excerpts": []
             }
           ],
           "mental_model": null
         }
 
-        Keep it fast and concise.
+        CRITICAL:
+        - First key_point is a paragraph (the key insight)
+        - Other key_points are concise takeaways
+        - Make it engaging and clear
+        - Focus on learning value
         """
     }
 
@@ -303,7 +313,7 @@ class AIAnalyzer: ObservableObject {
 
         let requestBody: [String: Any] = [
             "model": model,
-            "max_tokens": 800,
+            "max_tokens": 1200,
             "system": system,
             "messages": [
                 ["role": "user", "content": userMessage]
@@ -315,7 +325,7 @@ class AIAnalyzer: ObservableObject {
 
         print("🔧 [API] Request body size: \(bodyData.count) bytes")
         print("🔧 [API] Model: \(model)")
-        print("🔧 [API] Max tokens: 800")
+        print("🔧 [API] Max tokens: 1200")
 
         await updateProgress("Sending request to Claude API...")
 

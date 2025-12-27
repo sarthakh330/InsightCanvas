@@ -14,40 +14,55 @@ struct ConceptDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                // Breadcrumb (if has parent)
-                if concept.parentID != nil {
-                    breadcrumb
+            VStack(alignment: .leading, spacing: 32) {
+                // Title Section
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(concept.title)
+                        .font(.system(size: 28, weight: .semibold))
+                        .foregroundColor(Color(red: 0.067, green: 0.075, blue: 0.090))
+
+                    // One-line summary (emphasized)
+                    Text(concept.oneLineSummary)
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundColor(Color(red: 0.184, green: 0.561, blue: 0.420))
+                        .lineSpacing(4)
                 }
-
-                // Concept title
-                Text(concept.title)
-                    .font(.system(size: 24, weight: .semibold))
-                    .foregroundColor(Color(red: 0.067, green: 0.075, blue: 0.090))
-
-                // One-line summary
-                Text(concept.oneLineSummary)
-                    .font(.system(size: 16))
-                    .italic()
-                    .foregroundColor(Color(red: 0.361, green: 0.380, blue: 0.408))
-                    .padding(.top, -8)
+                .padding(.bottom, 8)
 
                 Divider()
 
-                // What This Is
-                sectionView(
-                    title: "WHAT THIS IS",
-                    content: concept.whatThisIs
-                )
+                // Three-Paragraph Summary
+                VStack(alignment: .leading, spacing: 24) {
+                    // Paragraph 1: What This Is
+                    summaryParagraph(
+                        number: "1",
+                        title: "What",
+                        content: concept.whatThisIs
+                    )
 
-                // Why It Matters
-                sectionView(
-                    title: "WHY IT MATTERS",
-                    content: concept.whyItMatters
-                )
+                    // Paragraph 2: Why It Matters
+                    summaryParagraph(
+                        number: "2",
+                        title: "Why",
+                        content: concept.whyItMatters
+                    )
 
-                // Key Points
-                keyPointsSection
+                    // Paragraph 3: Key Insight (first key point)
+                    if let firstPoint = concept.keyPoints.first {
+                        summaryParagraph(
+                            number: "3",
+                            title: "Key Insight",
+                            content: firstPoint
+                        )
+                    }
+                }
+
+                Divider()
+
+                // Core Takeaways (remaining key points)
+                if concept.keyPoints.count > 1 {
+                    coreTakeawaysSection
+                }
 
                 // From the Document (Excerpts)
                 if !concept.excerpts.isEmpty {
@@ -56,20 +71,68 @@ struct ConceptDetailView: View {
 
                 Spacer(minLength: 40)
             }
-            .padding(32)
+            .padding(40)
         }
         .background(Color("BG-Canvas"))
     }
 
-    private var breadcrumb: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-                .font(.system(size: 10))
-                .foregroundColor(Color(red: 0.361, green: 0.380, blue: 0.408))
+    private func summaryParagraph(number: String, title: String, content: String) -> some View {
+        HStack(alignment: .top, spacing: 16) {
+            // Number badge
+            ZStack {
+                Circle()
+                    .fill(Color(red: 0.184, green: 0.561, blue: 0.420).opacity(0.12))
+                    .frame(width: 32, height: 32)
 
-            Text("Parent Concept") // TODO: Get actual parent name
-                .font(.system(size: 12))
+                Text(number)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(Color(red: 0.184, green: 0.561, blue: 0.420))
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(title.uppercased())
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(Color(red: 0.561, green: 0.537, blue: 0.494))
+                    .tracking(0.8)
+
+                Text(content)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(red: 0.067, green: 0.075, blue: 0.090))
+                    .lineSpacing(7)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+
+    private var coreTakeawaysSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("CORE TAKEAWAYS")
+                .font(.system(size: 13, weight: .bold))
                 .foregroundColor(Color(red: 0.361, green: 0.380, blue: 0.408))
+                .tracking(1.0)
+
+            VStack(alignment: .leading, spacing: 12) {
+                ForEach(Array(concept.keyPoints.dropFirst().enumerated()), id: \.offset) { index, point in
+                    HStack(alignment: .top, spacing: 14) {
+                        // Bullet with number
+                        ZStack {
+                            Circle()
+                                .fill(Color(red: 0.184, green: 0.561, blue: 0.420))
+                                .frame(width: 24, height: 24)
+
+                            Text("\(index + 1)")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.white)
+                        }
+
+                        Text(point)
+                            .font(.system(size: 15))
+                            .foregroundColor(Color(red: 0.067, green: 0.075, blue: 0.090))
+                            .lineSpacing(5)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
         }
     }
 

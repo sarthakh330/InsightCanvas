@@ -11,7 +11,11 @@ struct AnalyzingView: View {
     let documentName: String
     @Binding var progress: String
     @Binding var error: String?
+    let snippets: [String]
     var onBackToHome: (() -> Void)?
+
+    @State private var currentSnippetIndex = 0
+    @State private var snippetOpacity: Double = 0
 
     var body: some View {
         ZStack {
@@ -63,6 +67,30 @@ struct AnalyzingView: View {
                         .id(progress)
                         .animation(.easeInOut(duration: 0.3), value: progress)
                         .frame(minHeight: 22)
+
+                    // Show actual document insights
+                    if !snippets.isEmpty && error == nil {
+                        VStack(spacing: 8) {
+                            Text("Reading:")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundColor(Color(red: 0.184, green: 0.561, blue: 0.420))
+
+                            Text("\"\(snippets[currentSnippetIndex])\"")
+                                .font(.system(size: 14, design: .serif))
+                                .foregroundColor(Color(red: 0.361, green: 0.380, blue: 0.408))
+                                .italic()
+                                .multilineTextAlignment(.center)
+                                .lineLimit(3)
+                                .opacity(snippetOpacity)
+                                .animation(.easeInOut(duration: 0.6), value: snippetOpacity)
+                        }
+                        .padding(.horizontal, 48)
+                        .padding(.top, 16)
+                        .frame(minHeight: 80)
+                        .onAppear {
+                            startSnippetRotation()
+                        }
+                    }
                 }
                 .padding(.horizontal, 40)
 
@@ -145,5 +173,38 @@ struct AnalyzingView: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.red.opacity(0.3), lineWidth: 1)
         )
+    }
+
+    /// Rotate through document snippets with smooth animations
+    private func startSnippetRotation() {
+        guard !snippets.isEmpty else { return }
+
+        // Fade in first snippet
+        withAnimation {
+            snippetOpacity = 1.0
+        }
+
+        // Cycle through snippets
+        Timer.scheduledTimer(withTimeInterval: 3.5, repeats: true) { timer in
+            guard error == nil else {
+                timer.invalidate()
+                return
+            }
+
+            // Fade out
+            withAnimation(.easeOut(duration: 0.4)) {
+                snippetOpacity = 0
+            }
+
+            // Change snippet after fade out
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                currentSnippetIndex = (currentSnippetIndex + 1) % snippets.count
+
+                // Fade in
+                withAnimation(.easeIn(duration: 0.4)) {
+                    snippetOpacity = 1.0
+                }
+            }
+        }
     }
 }

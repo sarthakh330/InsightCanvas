@@ -19,6 +19,7 @@ struct MainCoordinator: View {
     @State private var appState: AppState = .home
     @State private var analyzingProgress = ""
     @State private var analyzingError: String?
+    @State private var documentSnippets: [String] = []
 
     @StateObject private var documentParser = DocumentParser()
     @StateObject private var aiAnalyzer = AIAnalyzer()
@@ -34,6 +35,7 @@ struct MainCoordinator: View {
                     documentName: documentName,
                     progress: $analyzingProgress,
                     error: $analyzingError,
+                    snippets: documentSnippets,
                     onBackToHome: {
                         appState = .home
                         analyzingError = nil
@@ -59,7 +61,10 @@ struct MainCoordinator: View {
                 // Parse document
                 let parsedDoc = try await documentParser.parseDocument(at: url)
 
+                // Extract interesting snippets from the document
+                let snippets = extractKeySnippets(from: parsedDoc.text)
                 await MainActor.run {
+                    documentSnippets = snippets
                     analyzingProgress = "Extracting concepts..."
                 }
 
@@ -137,6 +142,31 @@ struct MainCoordinator: View {
                 }
             }
         }
+    }
+
+    /// Extract interesting sentences from the document to show during analysis
+    private func extractKeySnippets(from text: String) -> [String] {
+        // Split into sentences (simplified - look for periods followed by spaces or newlines)
+        let sentences = text.components(separatedBy: .newlines)
+            .flatMap { $0.components(separatedBy: ". ") }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.count > 40 && $0.count < 200 } // Good length for display
+
+        // Take up to 5 interesting sentences
+        // Prefer sentences with key phrases that suggest important content
+        let keyPhrases = ["key", "important", "core", "principle", "challenge", "approach",
+                          "insight", "concept", "framework", "model", "strategy", "goal",
+                          "because", "therefore", "however", "essential", "critical", "fundamental"]
+
+        let prioritized = sentences.filter { sentence in
+            let lowerSentence = sentence.lowercased()
+            return keyPhrases.contains(where: { lowerSentence.contains($0) })
+        }
+
+        // Combine prioritized and regular sentences, take 5 max
+        let selected = Array((prioritized + sentences).prefix(5))
+
+        return selected.isEmpty ? ["Analyzing document structure..."] : selected
     }
 }
 

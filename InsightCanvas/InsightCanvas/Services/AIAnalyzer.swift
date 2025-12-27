@@ -401,14 +401,38 @@ class AIAnalyzer: ObservableObject {
 
         do {
             let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            // Don't use convertFromSnakeCase - we have custom CodingKeys defined
             let result = try decoder.decode(AnalysisResponse.self, from: jsonData)
             print("✅ [Parser] Successfully decoded \(result.concepts.count) concepts")
             return result
-        } catch {
-            // Include response preview in error for debugging
+        } catch let DecodingError.keyNotFound(key, context) {
             let preview = String(cleanedJSON.prefix(800))
-            print("❌ [Parser] Decode error: \(error)")
+            print("❌ [Parser] Missing key '\(key.stringValue)' at: \(context.codingPath.map { $0.stringValue }.joined(separator: "."))")
+            print("❌ [Parser] Context: \(context.debugDescription)")
+            print("❌ [Parser] JSON preview:\n\(preview)")
+            throw AIAnalyzerError.parsingError("Missing required field '\(key.stringValue)' in JSON response.\n\nJSON preview:\n\(preview)")
+        } catch let DecodingError.typeMismatch(type, context) {
+            let preview = String(cleanedJSON.prefix(800))
+            print("❌ [Parser] Type mismatch for \(type) at: \(context.codingPath.map { $0.stringValue }.joined(separator: "."))")
+            print("❌ [Parser] Context: \(context.debugDescription)")
+            print("❌ [Parser] JSON preview:\n\(preview)")
+            throw AIAnalyzerError.parsingError("Type mismatch in JSON: expected \(type)\n\nJSON preview:\n\(preview)")
+        } catch let DecodingError.valueNotFound(type, context) {
+            let preview = String(cleanedJSON.prefix(800))
+            print("❌ [Parser] Value not found for \(type) at: \(context.codingPath.map { $0.stringValue }.joined(separator: "."))")
+            print("❌ [Parser] Context: \(context.debugDescription)")
+            print("❌ [Parser] JSON preview:\n\(preview)")
+            throw AIAnalyzerError.parsingError("Missing value in JSON for type \(type)\n\nJSON preview:\n\(preview)")
+        } catch let DecodingError.dataCorrupted(context) {
+            let preview = String(cleanedJSON.prefix(800))
+            print("❌ [Parser] Data corrupted at: \(context.codingPath.map { $0.stringValue }.joined(separator: "."))")
+            print("❌ [Parser] Context: \(context.debugDescription)")
+            print("❌ [Parser] JSON preview:\n\(preview)")
+            throw AIAnalyzerError.parsingError("Corrupted JSON data: \(context.debugDescription)\n\nJSON preview:\n\(preview)")
+        } catch {
+            // Generic error
+            let preview = String(cleanedJSON.prefix(800))
+            print("❌ [Parser] Unknown decode error: \(error)")
             print("❌ [Parser] JSON preview:\n\(preview)")
             throw AIAnalyzerError.parsingError("JSON decode failed: \(error.localizedDescription)\n\nResponse preview:\n\(preview)")
         }
